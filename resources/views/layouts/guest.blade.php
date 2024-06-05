@@ -18,7 +18,10 @@
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
             <div>
                 <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                    {{-- <x-application-logo class="w-20 h-20 fill-current text-gray-500" />BookShelf --}}
+                <img src="{{asset('img/logo.png')}}" class="img-fluid" width="100px" height="100px" alt="">
+                <p class="text-center">BookShelf</p>
+                </img>
                 </a>
             </div>
 

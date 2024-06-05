@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
-            $table->string('table');
+            $table->string('titre');
             $table->string('auteur');
             $table->string('date_publication');
+            $table->string('livreFile');
             $table->string('genre');
             $table->string('category');
             $table->string('status');

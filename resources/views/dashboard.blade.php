@@ -21,24 +21,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <title>Bookshelf</title>
 </head>
 <body>
-    <div class="sidebar-wrapper-docs">
-        <side-bar title="Sidebar" short-title="S" background-color="orange">
-             <template slot-scope="props" slot="links">
-               <sidebar-link
-                       :link="{
-                         name: 'Dashboard',
-                         icon: 'tim-icons icon-chart-pie-36',
-                         path: '#',
-                         isRoute: false,
-                       }">
-     
-               </sidebar-link>
-             </template>
-       </side-bar>        
-     </div>
-    
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 bg-light" style="height: 1000px;">
+            @include('sidebar')
+        </div>
+        <div class="col-md-9">
+            @include('menu')
+            <div class="container">
+                {{-- @include('navTabs') --}}
+                @yield('index_book')
+                @yield('create_book')
+                @yield('article')
+                {{-- @php
+                    echo '<pre>';
+                    var_dump($_SERVER);
+                @endphp --}}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
 </body>
 </html>
