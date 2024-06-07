@@ -49,9 +49,10 @@ class BookController extends Controller
     public function show(string $id)
     {
         //
-        $book = Book::findorFail($id);
+        // dd($id);
+        $book = Book::find($id);
         $titre = "Consultation du livre ".$book->titre;
-        return view('book/show_book',compact('book','titre'));
+        return view('book.show_book')->with('book',$book)->with('titre',$titre);
     }
 
     /**
@@ -92,8 +93,33 @@ class BookController extends Controller
     }
     public function search(Request $request)
     {
-        $search = $request->input('serch');
-        $results = Book::where('titre', 'like', "%search%")->get();
-        return view('book/search',['results'=>$results,'search'=>$search]);
+        $search = $request->input('search');
+        // dd($search);
+        // dump($request);
+        $results = Book::where('titre', 'like', "%$search%")
+            ->orWhere('auteur','like', "%$search%")
+            ->orWhere('category','like', "%$search%")
+            ->orWhere('genre','like', "%$search%")
+            ->get();
+        $titre = "Résultats de la recherche pour \"$search\"";
+        // var_dump($results);
+
+        return view('book/index_book',compact('results','titre'));
     }
+    public function filterBy(Request $request)
+    {
+        $filter = $request->input('filter');
+        // dd($search);
+        // dump($request);
+        $results = Book::where('titre', 'like', "%$filter%")
+            ->orWhere('auteur','like', "%$filter%")
+            ->orWhere('category','like', "%$filter%")
+            ->orWhere('genre','like', "%$filter%")
+            ->get();
+        $titre = "Résultats de la recherche pour \"$filter\"";
+        // var_dump($results);
+        return view('book/article')->with('results',$results)->with('titre',$titre);
+    }
+    
+    
 }

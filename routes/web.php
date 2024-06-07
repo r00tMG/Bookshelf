@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Book;
 use Illuminate\Http\Request;
@@ -11,7 +12,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', function () {
-    return view('dashboard');
+    $books = Book::all();
+    return view('dashboard')->with('books',$books);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -26,16 +28,15 @@ Route::resource('books',BookController::class);
 
 // Affichage des articles 
 Route::get('/article',function(){
-    // $books = new Book();
-    $books = Book::all();
-    return view('book/article',compact('books'));
-})->name('book.article');
-// Route::get('/search',function(Request $request){
-//     // $books = new Book();
-//     $search = $request->input('search');
-//     $results = Book::where('titre','like','%$search%')->get();
-//     return redirect()->route('books.index',compact('results'));
-//     // return to_route('books.index',compact('results'));
-// })->name('book.search');
 
-Route::get('/search', [BookController::class,'search'])->name('book.search');
+    $books = Book::all();
+    return view('book/article')->with('books',$books);
+})->name('books.article');
+
+
+Route::get('/search', [BookController::class,'search'])->name('books.search');
+
+Route::get('/filter',[BookController::class,'filterBy'])->name('books.filter');
+
+Route::get('location/create/{id}',[LocationController::class,'createLocation'])->name('location.create');
+// Route::resource('location',LocationController::class);

@@ -9,4 +9,8 @@ class Book extends Model
 {
     use HasFactory;
     protected $fillable = ['titre','auteur','date_publication','livreFile','genre','category','status'];
+    public function location()
+    {
+        return $this->hasMany(Location::class);
+    }
 }

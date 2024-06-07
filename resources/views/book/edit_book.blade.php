@@ -1,8 +1,9 @@
-
-@extends('dashboard')
-
-@section('create_book')
-{{-- @include('navTabs') --}}
+<x-custom-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{-- {{ __('Dashboard') }} --}}
+        </h2>
+    </x-slot>
 
     <div class="container btn-light arounded shadow my-5 p-5">
         <h3 class="text-center my-3">{{$titre}}</h3>
@@ -63,9 +64,7 @@
                 </div>
             </div>
         </form>
-        
-            
-            
-
     </div>
-@endsection
+
+
+</x-custom-layout>

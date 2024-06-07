@@ -5,10 +5,10 @@
         </h2>
     </x-slot>
 
-    
+    @dump($_GET)
 
     <div class="container btn-light arounded shadow my-5 p-5">
-        {{-- <h3 class="text-center my-3">{{$titre}}</h3> --}}
+        <h3 class="text-center my-3">{{$titre}}</h3>
         <form class="form-group" action="{{route('books.store')}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="container ">
