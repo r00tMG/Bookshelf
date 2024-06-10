@@ -26,10 +26,10 @@
                         <p class="card-text text-center">{{$book->auteur}}</p>
                         <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis aspernatur quia obcaecati ab aliquid provident, totam quis modi reiciendis illum. Nesciunt ducimus veniam officia animi cupiditate distinctio mollitia eaque ratione?</p>
 
-                        <form action="{{ route('location.create',$book->id) }}" method="GET">
-                            @csrf
-                            <button class="btn btn-outline-primary ">Louer</button>
-                        </form>
+                        {{-- <form action="{{ route('location.create',$book) }}" method="GET"> --}}
+                            {{-- @csrf --}}
+                            <a href="{{'/location/create/'.$book->id}}" class="btn btn-outline-primary ">Louer</a>
+                        {{-- </form> --}}
                     </div>
                 </div>
             </div>

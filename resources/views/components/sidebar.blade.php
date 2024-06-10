@@ -6,7 +6,7 @@
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
-      @dump(Auth::user()->email)
+      {{-- @dump(Auth::user()->email) --}}
       {{-- @dump(request()->route()->getName()) --}}
 
       {{-- @if ( Auth::email() === 'admin@gmail.com' ) --}}

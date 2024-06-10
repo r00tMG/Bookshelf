@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('date_retour');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('book_id')->references('id')->on('books');
         });
     }
 

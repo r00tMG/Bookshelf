@@ -24,7 +24,6 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::resource('books',BookController::class);
 
 // Affichage des articles 
 Route::get('/article',function(){
@@ -38,5 +37,12 @@ Route::get('/search', [BookController::class,'search'])->name('books.search');
 
 Route::get('/filter',[BookController::class,'filterBy'])->name('books.filter');
 
-Route::get('location/create/{id}',[LocationController::class,'createLocation'])->name('location.create');
 // Route::resource('location',LocationController::class);
+Route::prefix('location')->name('location.')->group(function(){
+    Route::get('create/{id}',[LocationController::class,'create'])->name('create');
+    Route::post('/store/{id}',[LocationController::class,'locationBook'])->name('store');
+    Route::get('/index',[LocationController::class,'index'])->name('index');
+    
+});
+
+Route::resource('books',BookController::class);

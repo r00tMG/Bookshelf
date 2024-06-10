@@ -7,70 +7,85 @@ use App\Models\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use function Laravel\Prompts\select;
+
 class LocationController extends Controller
 {
-    //
-    // public function index(){
-    //     $location = Location::all();
-    //     return view('location.show_location',compact('location'));
-    // }
-    // public function show(string $id)
-    // {
-    //     $book = new BookController();
-    //     $piece  = $book->show($id);
-    //     dd($piece->id);
-    //     return view('location.create_location',compact($piece));
-    // }
+   
 
-    public function createLocation(string $id)
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create($id)
+    {
+        //
+        $book = Book::find($id);
+        
+        // $title = "Valider la location de".$book->titre;
+        return view('location.create_location',[
+            'book'=>$book,
+            // 'titre'=>$title
+        ]);
+    }
+   
+    
+    public function locationBook(Request $request,$id)
     {
         $book = Book::find($id);
-        dump($book->$id);
-        $titre = "Validez la location de vote livre";
-        return view('location.create_location',compact('titre'));
-    }
-
-    public function showBook()
-    {
-        $books = Book::where('status', 'Disponible')->get();
-        return view('book.index', compact('books'));
-    }
-
-    public function locationBook(Request $request, $id)
-    {
-        $book = Book::find($id);
-        if($book->staus !== 'Disponible')
-        {
-            return view('book.show_book')->with('erro','Le livre que vous avez choisi est indisponible');
+        // dd($book);
+        if ($book->status != 'Disponible') {
+            return redirect()->back()->with('error', 'Le livre n\'est pas disponible');
         }
+        // dd($book, Auth::id(), $id);
+
+        
         $location = Location::create($request->all());
-        return view('book.show_index',compact($location))->with('La location a été faite avec succés');
+
+        return to_route('location.index')
+        ->with('book',$book)
+        ->with('location',$location)
+        ->with('success','votre demande a été bien envoyée');
+    }
+    public function index()
+    {
+        $locations = Location::all();
+        foreach ($locations as $value) {
+            $books = [];
+            $book = [];
+        //     # code...
+            $books[] = $value->book_id;
+        }
+        for ($i=0; $i <count($books) ; $i++) { 
+            # code...
+            $book[] = Book::where($books[$i],'=','id');
+        }
+        dd($book);
+
+        return view('location.index_location',[
+            'locations'=>$locations,
+            'books'=>$books
+        ]);
     }
 
-    public function RetourBook(Request $request,$id)
+    public function retourBook(Location $location, $id)
     {
-        $location = Location::find($id);
+        $location = Location::findOrFail($id);
         $book = $location->book_id;
 
-        if($location->user_id !== Auth::id())
-        {
-            return view('book.show_indew')->with('error','Vous êtes pas autorisé à faire cette action');
+        if ($location->user_id != Auth::id()) {
+            return redirect()->back()->with('error', 'Vous n\'êtes pas autorisé à faire cette action');
         }
+
         $location->date_retour = now();
         $location->save();
 
         $book->status = 'Disponible';
         $book->save();
-        return view('book/show_book',compact($location,$book))->with('success','Livre returné avec succés');
+
+        return redirect()->route('location.index')->with('success', 'Book returned successfully');
     }
 
-    // public function showMyLocation()
-    // {
-    //     $location = Auth::user()->location()->with('book')->get();
-    //     return view('location.index', compact('location'));
-    // }
+    
 
-
-
-
+    
 }
