@@ -42,7 +42,11 @@ Route::prefix('location')->name('location.')->group(function(){
     Route::get('create/{id}',[LocationController::class,'create'])->name('create');
     Route::post('/store/{id}',[LocationController::class,'locationBook'])->name('store');
     Route::get('/index',[LocationController::class,'index'])->name('index');
-    
 });
+Route::get('/abonnement/{id}',[BookController::class,'abonnement']);
+
+Route::get('/book/abonner/',function(){
+    return view('book/abonner');
+})->name('books.abonner');
 
 Route::resource('books',BookController::class);

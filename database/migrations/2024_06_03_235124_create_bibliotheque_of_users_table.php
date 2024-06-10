@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('bibliotheque_of_users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('book_id');
-            $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('book_id')->references('id')->on('books');
+            $table->string('titre');
+            $table->string('auteur');
+            $table->string('date_publication');
+            $table->string('livreFile');
+            $table->string('genre');
+            $table->string('category');
+            $table->string('status');
         });
     }
 

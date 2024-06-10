@@ -7,6 +7,9 @@
     <li class="nav-item">
       <a class="nav-link link-dark @if(request()->route()->getName() === 'books.create') active @endif" href="{{route('books.create')}}">Publier</a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link link-dark @if(request()->route()->getName() === 'location.index') active @endif" href="{{route('location.index')}}">Liste abonnement</a>
+    </li>
     {{-- <li class="nav-item">
       <a class="nav-link" href="#">Link</a>
     </li>

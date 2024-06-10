@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BibliothequeOfUser;
 use App\Models\Book;
 use Illuminate\Http\Request;
 
@@ -120,6 +121,12 @@ class BookController extends Controller
         // var_dump($results);
         return view('book/article')->with('results',$results)->with('titre',$titre);
     }
-    
-    
+    public function abonnement($id)
+    {
+
+        $books = Book::find($id);
+        // $bibliotheque_of_users = BibliothequeOfUser::create($book);
+        return view('book.abonner')->with('books',$books);
+        
+    }    
 }

@@ -17,7 +17,11 @@
         <div class="col-md-9">
             <x-menu/>
             {{-- @if (Auth::user()->email == 'admin@gmail.com') --}}
+                @auth
+                    @if (Auth::user()->email == 'admin@gmail.com')
                 <x-navTabs/>
+                    @endif
+                @endauth
             {{-- @endif --}}
             <!-- Page Heading -->
             

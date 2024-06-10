@@ -36,9 +36,6 @@ class LocationController extends Controller
         if ($book->status != 'Disponible') {
             return redirect()->back()->with('error', 'Le livre n\'est pas disponible');
         }
-        // dd($book, Auth::id(), $id);
-
-        
         $location = Location::create($request->all());
 
         return to_route('location.index')
@@ -48,7 +45,7 @@ class LocationController extends Controller
     }
     public function index()
     {
-        $locations = Location::all();
+        $locations = Location::paginate(5);
         foreach ($locations as $value) {
             $books = [];
             $book = [];
@@ -59,11 +56,11 @@ class LocationController extends Controller
             # code...
             $book[] = Book::where($books[$i],'=','id');
         }
-        dd($book);
+        // dd($book);
 
         return view('location.index_location',[
             'locations'=>$locations,
-            'books'=>$books
+            'book'=>$book
         ]);
     }
 
