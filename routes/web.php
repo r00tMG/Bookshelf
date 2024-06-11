@@ -49,4 +49,7 @@ Route::get('/book/abonner/',function(){
     return view('book/abonner');
 })->name('books.abonner');
 
+Route::post('book/bibliotheque',[BookController::class,'bibliothequeUsers'])->name('books.bibliotheque');
+Route::get('book/bibliotheque',[BookController::class,'bibliothequeUsers'])->name('books.bibliotheque');
+
 Route::resource('books',BookController::class);

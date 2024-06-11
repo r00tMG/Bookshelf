@@ -46,9 +46,9 @@ class LocationController extends Controller
     public function index()
     {
         $locations = Location::paginate(5);
+        $books = [];
+        $book = [];
         foreach ($locations as $value) {
-            $books = [];
-            $book = [];
         //     # code...
             $books[] = $value->book_id;
         }

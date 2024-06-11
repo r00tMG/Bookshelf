@@ -121,12 +121,31 @@ class BookController extends Controller
         // var_dump($results);
         return view('book/article')->with('results',$results)->with('titre',$titre);
     }
-    public function abonnement($id)
+    public function abonnement(Request $request,$id)
     {
 
         $books = Book::find($id);
-        // $bibliotheque_of_users = BibliothequeOfUser::create($book);
-        return view('book.abonner')->with('books',$books);
+        $data = $request->input();
+        // dd($request->input());
+        $data['livreFile'] = $books->livreFile;
+        // dd($data);
+        // $books->update($data);
+        return view('book.abonner')->with('books',$books)->with('livre',$data['livreFile']);
         
     }    
+    public function bibliothequeUsers(Request $request)
+    {
+        
+        $books = $request->all();
+        $bibs =  BibliothequeOfUser::create($books);
+        $livres = $bibs->all();
+      
+        return view('book.bibliotheque',[
+            'livres'=>$livres
+
+        ]);
+
+    }
+    
+    
 }

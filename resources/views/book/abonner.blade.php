@@ -4,63 +4,73 @@
             {{-- {{ __('Dashboard') }} --}}
         </h2>
     </x-slot>
-@dump($books)
-<div class="container my-5 w-25-m-auto">
-    <div class="row">
-        <div class="col-md-4 offset-4">
-            <form class="form-group" action="{{ route('books.filter') }}" method="GET" role="search">
-                <input class="form-control me-2"  name="filter" placeholder="Search" aria-label="Search">
-            </form>
-        </div>
-    </div>
-</div>
-{{-- @dump(request()->has('filter')) --}}
-{{-- @if(request()->has('filter')) --}}
-    {{-- @if ($results->isEmpty()) --}}
-    <p class="text-danger">Aucun résultats n'a été trouvé</p>
-    {{-- @else --}}
-        {{-- @foreach ($results as $item) --}}
-        <div class="col-md-3">
-            <div class="card m-3" style="width: 15rem;">
-                <p class="card-text text-center text-muted">Publié le 
-                    {{-- {{ $item->created_at->format('d-m-Y à H:i') }} --}}
-                </p>
-                {{-- <embed src="{{asset('storage/'.$item->livreFile)}}" class="card-img-top" alt="..."> --}}
-                <div class="card-body">
-                    {{-- <h5 class="card-title text-center">{{$item->titre}}</h5> --}}
-                    {{-- <p class="card-text text-center">{{$item->auteur}}</p> --}}
-                    {{-- <p class="text-center"><a href="{{ route('books.show',$item->id) }}" >Voir plus...</a></p> --}}
-                </div>
-            </div>
-        </div>
-        {{-- @endforeach --}}
-    {{-- @endif --}}
-    
-    
-{{-- @else --}}
 
-<div class="container mt-5">
-    <div class="row">
-        {{-- @foreach ($books as $book) --}}
-            {{-- @dump($book) --}}
-            <div class="col-md-3">
-                <div class="card m-3" style="width: 15rem;">
-                    <p class="card-text text-center text-muted">Publié le 
-                        {{-- {{ $book->created_at->format('d-m-Y à H:i') }} --}}
-                    </p>
-                    {{-- <embed src="{{asset('storage/'.$book->livreFile)}}" class="card-img-top" alt="..."> --}}
-                    <div class="card-body">
-                        {{-- <h5 class="card-title text-center">{{$book->titre}}</h5> --}}
-                        {{-- <p class="card-text text-center">{{$book->auteur}}</p> --}}
-                        {{-- <p class="text-center"><a href="{{ route('books.show',$book->id) }}" >Voir plus...</a></p> --}}
+    
+
+    <div class="container btn-light arounded shadow my-5 p-5">
+        {{-- <h3 class="text-center my-3">{{$titre}}</h3> --}}
+        <form class="form-group" action="{{route('books.bibliotheque')}}" method="post" enctype="multipart/form-data">
+            @csrf
+            <div class="container ">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <input required type="text" name="titre" value="{{$books->titre}}" placeholder="Titre du livre" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+
+                        <div class="mb-3">
+                            <input required type="text" name="auteur" value="{{$books->auteur}}" placeholder="Auteur du livre" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <input  type="text" name="livreFile" value="{{$books->livreFile}}" placeholder="File du livre" class="form-control">
+                            <span></span>
+                            </input>
+                            {{-- @dump($books) --}}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <input required type="date" name="date_publication" value="{{$books->date_publication}}" placeholder="Date de publication" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <select required selected class="form-control" name="genre" id="">
+                                <option value="{{$books->genre}}">{{$books->genre}}</option>
+                                <option value="Naratif">Naratif</option>
+                                <option value="Théatral">Théatral</option>
+                                <option value="Poétique">Poétique</option>
+                                <option value="Argumentatif">Argumentatif</option>
+                                <option value="Epistolaire">Epistolaire</option>
+                            </select>                
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <select required selected class="form-control" name="category" id="">
+                                <option value="{{$books->category}}">{{$books->category}}</option>
+                               <option value="Roman">Roman</option>
+                                <option value="Lettre">Lettre</option>
+                                <option value="Poésie">Poésie</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <select required class="form-control" name="status" id="">
+                                <option value="{{$books->status}}">{{$books->status}}</option>
+                                <option value="Disponible">Disponible</option>
+                                <option value="Disponible">Non Disponible</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-center">
+                        <input type="submit" name="" class="btn  btn-primary" value="Envoyer" id="">
                     </div>
                 </div>
             </div>
-        {{-- @endforeach --}}
+        </form>
+        
+            
+            
+
     </div>
-
-</div>
-    
-{{-- @endif --}}
-
 </x-custom-layout>
