@@ -11,7 +11,7 @@ use function Laravel\Prompts\select;
 
 class LocationController extends Controller
 {
-   
+
 
     /**
      * Show the form for creating a new resource.
@@ -20,15 +20,15 @@ class LocationController extends Controller
     {
         //
         $book = Book::find($id);
-        
+
         // $title = "Valider la location de".$book->titre;
         return view('location.create_location',[
             'book'=>$book,
             // 'titre'=>$title
         ]);
     }
-   
-    
+
+
     public function locationBook(Request $request,$id)
     {
         $book = Book::find($id);
@@ -47,20 +47,15 @@ class LocationController extends Controller
     {
         $locations = Location::paginate(5);
         $books = [];
-        $book = [];
         foreach ($locations as $value) {
-        //     # code...
-            $books[] = $value->book_id;
+            $books[$value->book_id] = Book::find($value->book_id)->titre;
         }
-        for ($i=0; $i <count($books) ; $i++) { 
-            # code...
-            $book[] = Book::where($books[$i],'=','id');
-        }
+
         // dd($book);
 
         return view('location.index_location',[
             'locations'=>$locations,
-            'book'=>$book
+            'book'=>$books
         ]);
     }
 
@@ -82,7 +77,7 @@ class LocationController extends Controller
         return redirect()->route('location.index')->with('success', 'Book returned successfully');
     }
 
-    
 
-    
+
+
 }

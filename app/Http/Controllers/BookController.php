@@ -41,7 +41,7 @@ class BookController extends Controller
         // dd($data);
         $data['livreFile'] = $request->livreFile->store('uploads');
         Book::create($data);
-        return redirect()->route('books.index');
+        return redirect()->route('books.index')->with('success','Votre livre a été bien créé');
     }
 
     /**
@@ -53,7 +53,10 @@ class BookController extends Controller
         // dd($id);
         $book = Book::find($id);
         $titre = "Consultation du livre ".$book->titre;
-        return view('book.show_book')->with('book',$book)->with('titre',$titre);
+        return view('book.show_book')
+        ->with('book',$book)
+        ->with('titre',$titre)
+        ;
     }
 
     /**
@@ -78,7 +81,7 @@ class BookController extends Controller
         $data = $request->all();
         $data['livreFile'] = $request->livreFile->store('update');
         $book->update($data);
-        return redirect()->route('books.index');
+        return redirect()->route('books.index')->with('success','Votre livre a été bien modifié');
 
     }
 
@@ -135,14 +138,11 @@ class BookController extends Controller
     }    
     public function bibliothequeUsers(Request $request)
     {
-        
         $books = $request->all();
         $bibs =  BibliothequeOfUser::create($books);
         $livres = $bibs->all();
-      
         return view('book.bibliotheque',[
             'livres'=>$livres
-
         ]);
 
     }

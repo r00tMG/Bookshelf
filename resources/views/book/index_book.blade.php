@@ -84,7 +84,16 @@
         
     @else
         <div class="container p-4">
-        
+            @if (session('success'))
+                <div class="text-center alert-success alert">
+                    {{session('success')}}
+                </div>
+            @endif
+            @if (session('error'))
+                <div class="text-center alert-danger alert">
+                    {{session('error')}}
+                </div>
+            @endif
         <h3 class="text-center">{{$titre}}</h3>
         <div class="table-responsive">
         <table class="table table-bordered" >

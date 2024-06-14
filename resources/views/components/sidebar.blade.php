@@ -31,7 +31,7 @@
       @auth
           @if (Auth::user() && Auth::user()->email != 'admin@gmail.com')
       <li>
-        <a href="{{route('books.abonner')}}" class="nav-link link-dark @if(request()->route()->getName()==='books.abonner') active @endif">
+        <a href="{{route('books.bibliotheque')}}" class="nav-link link-dark @if(request()->route()->getName()==='books.bibliotheque') active @endif">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
           Mes livres
         </font></font></a>

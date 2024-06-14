@@ -13,14 +13,14 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <input required type="text"  name="user_id" value="{{ Auth::id() }}" placeholder="Utilisateur connecté" class="form-control">
+                            <input required type="hidden"  name="user_id" value="{{ Auth::id() }}" placeholder="Utilisateur connecté" class="form-control">
                         </div>
-                
+
                     </div>
                     <div class="col-md-6">
 
                         <div class="mb-3">
-                            <input required type="text"  name="book_id" value="{{ $book->id }}" placeholder="Livre selectionné" class="form-control">
+                            <input required type="hidden"  name="book_id" value="{{ $book->id }}" placeholder="Livre selectionné" class="form-control">
                         </div>
                         <div class="mb-3">
                             <input  type="date" value="{{ now()->format('Y-m-d') }}" name="date_location" placeholder="Date de location " class="form-control">
@@ -29,7 +29,7 @@
                             <input  type="date" value="{{ now()->addDays(14)->format('Y-m-d') }}" name="date_retour" placeholder="Date de retour " class="form-control">
                         </div>
                     </div>
-                    
+
                     <div class="col-md-12 text-center">
                         <input type="submit" name="" class="btn  btn-primary" value="Valider" id="">
                     </div>
